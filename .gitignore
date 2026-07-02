@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.python-version
+
+# Virtual environments
+env/
+venv/
+myenv/
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs and database files
+*.log
+*.sqlite3
+
+# Misc
+.DS_Store
