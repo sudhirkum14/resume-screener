@@ -29,74 +29,78 @@ const resumeCount = document.getElementById('resume-count');
 const apiUrlEl = document.getElementById('api-url');
 const apiStatusEl = document.getElementById('api-status');
 
-jdE1.addEventListener('input',() => {
-    jdCount.textContent = jdE1.ariaValueMax.length;
+jdE1.addEventListener('input', () => {
+  jdCount.textContent = jdE1.value.length;
 });
 
-function loadSample(type){
-    if (type === 'jd'){
-        jdE1.value = SAMPLE_JD;
-        jdCount.textContent = resumeE1.value.length;
+resumeE1.addEventListener('input', () => {
+  resumeCount.textContent = resumeE1.value.length;
+});
 
-    }
-    else{
-        resumeE1.value =SAMPLE_RESUME;
-        resumeCount.textContent = SAMPLE_RESUME.length();
-    }
+function loadSample(type) {
+  if (type === 'jd') {
+    jdE1.value = SAMPLE_JD;
+    jdCount.textContent = SAMPLE_JD.length;
+
+  }
+  else {
+    resumeE1.value = SAMPLE_RESUME;
+    resumeCount.textContent = SAMPLE_RESUME.length;
+  }
 }
 
-async function checkApiHealth(){
-    try{
-        const res =await fetch(`${apiUrlE1.value}/health`);
-        apiStatusE1.className = res.ok ? 'api-status online': 'api-status offline';
-    }
-    catch{
-        apiStatusE1.className = 'api-status offline';
-    }
+async function checkApiHealth() {
+  try {
+    const res = await fetch(`${apiUrlEl.value}/health`);
+    apiStatusEl.className = res.ok ? 'api-status online' : 'api-status offline';
+  }
+  catch {
+    apiStatusEl.className = 'api-status offline';
+  }
 }
 
 checkApiHealth();
-apiUrlE1.addEventListener('change',checkApiHealth);
+apiUrlEl.addEventListener('change', checkApiHealth);
 
-function showError(msg){
-    const errorBox = document.getElementById('error-box');
-    errorBox.textContent = msg;
-    errorBox.style.display = 'block';
+function showError(msg) {
+  const errorBox = document.getElementById('error-box');
+  errorBox.textContent = msg;
+  errorBox.style.display = 'block';
 }
 
-function hideError(){
-    document.getElementById('error-box').style.display = 'none';
+function hideError() {
+  document.getElementById('error-box').style.display = 'none';
 }
 
-function getScoreClass(score){
-    if (score >= 70) return 'high';
-    if (score >= 40) return 'mid';
-    return 'low';
+function getScoreClass(score) {
+  if (score >= 70) return 'high';
+  if (score >= 40) return 'mid';
+  return 'low';
 }
 
-async function screenResume(){
-    const jd = jdE1.value.trim();
-    const resume = resumeE1.value.trim()
-    const btn = document.getElementById('screen-btn');
-    const loading = document.getElementById('loading');
-    const resultSection = document.getElementById('result-section');
-    hideError();
+async function screenResume() {
+  const jd = jdE1.value.trim();
+  const resume = resumeE1.value.trim()
+  const btn = document.getElementById('screen-btn');
+  const loading = document.getElementById('loading');
+  const resultSection = document.getElementById('result-section');
+  hideError();
 
-    if(jd.length<50){
-        showError('job description must be atleast 50 characters.');
-        return;
-    }
-    if(resume.length<50){
-        showError('Resume must be at least 50 characters');
-        return;
-    }
+  if (jd.length < 50) {
+    showError('job description must be atleast 50 characters.');
+    return;
+  }
+  if (resume.length < 50) {
+    showError('Resume must be at least 50 characters');
+    return;
+  }
 
-    btn.disabled = true;
-    btn.textContent = 'Screening...';
-    loading.style.display = 'block';
-    resultSection.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Screening...';
+  loading.style.display = 'block';
+  resultSection.style.display = 'none';
 
-    try {
+  try {
     const res = await fetch(`${apiUrlEl.value}/screen`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

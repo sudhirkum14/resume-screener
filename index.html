@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Resume Screener </title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>Smart Resume Screener</h1>
-            <p class="subtitle">AI-powered resume matching against job desriptions</p>
+            <p class="subtitle">AI-powered resume matching against job descriptions</p>
         </header>
         <div class="api-config">
             <span class="api-status" id="api-status"></span>
-            <input type="text" id = "api-url" value="http://localhost:8000" placeholder="API base url">
+            <input type="text" id="api-url" value="http://localhost:8000" placeholder="API base url">
         </div>
 
         <div class="grid">
-            <div class = "card">
+            <div class="card">
                 <label for="job-description">Job description</label>
                 <textarea id="job-description" placeholder="Paste the job description here..."></textarea>
-                <div class="char-count"><span id="jd-count">0</span>characters</div>
+                <div class="char-count"><span id="jd-count">0</span> characters</div>
                 <span class="sample-link" onclick="loadSample('jd')">Use sample job description</span>
             </div>
 
             <div class="card">
                 <label for="resume">Resume</label>
                 <textarea id="resume" placeholder="Paste the resume text here..."></textarea>
-                <div class="char-count"><span id="resume-count">0</span>characters</div>
+                <div class="char-count"><span id="resume-count">0</span> characters</div>
                 <span class="sample-link" onclick="loadSample('resume')">Use Sample Resume</span>
             </div>
         </div>
@@ -49,7 +51,7 @@
                 <div class="score-row">
                     <div class="score-circle" id="score-circle">--</div>
                     <div>
-                        <div class="=score-label">Match score</div>
+                        <div class="score-label">Match score</div>
                         <div class="recommendation" id="recommendation">--</div>
                     </div>
                 </div>
@@ -68,4 +70,5 @@
 
     <script src="scripts.js"></script>
 </body>
+
 </html>
